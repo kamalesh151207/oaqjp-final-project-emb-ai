@@ -1,2 +1,2 @@
-# Project
-none
+# Final Project
+Emotion Detection Application using Watson NLP and Flask

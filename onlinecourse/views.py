@@ -49,5 +49,14 @@ def submit(request):
 
 
 def show_exam_result(request):
-    result = Submission.objects.last()
-    return render(request, "result.html", {"result": result})
+    submission = Submission.objects.last()
+
+    course = Course.objects.first()
+    questions = Question.objects.filter(course=course)
+
+    return render(request, "result.html", {
+        "score": submission.score,
+        "total": submission.total,
+        "result": submission,
+        "questions": questions,
+    })

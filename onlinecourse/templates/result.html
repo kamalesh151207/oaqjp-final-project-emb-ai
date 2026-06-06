@@ -1,11 +1,41 @@
-<h1>🎉 Congratulations</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Result</title>
+</head>
+<body>
 
-<h2>Your Result</h2>
+    <h1>🎉 Congratulations</h1>
 
-<p>Your Score: {{ score }} / {{ total }}</p>
+    <h2>Your Result</h2>
 
-{% if result %}
-  <p>Status: Passed ✅</p>
-{% else %}
-  <p>Status: Completed</p>
-{% endif %}
+    <p>Your Score: {{ score }} / {{ total }}</p>
+
+    <p>Status: Passed ✅</p>
+
+    <hr>
+
+    <h2>Exam Results</h2>
+
+    {% for question in questions %}
+        <div>
+            <h3>{{ question.text }}</h3>
+
+            <ul>
+                {% for choice in question.choice_set.all %}
+                    <li>
+                        {{ choice.text }}
+
+                        {% if choice.is_correct %}
+                            ✅ Correct Answer
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        <hr>
+    {% endfor %}
+
+</body>
+</html>

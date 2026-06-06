@@ -45,10 +45,23 @@ class Choice(models.Model):
         return self.text
 
 
-class Submission(models.Model):
-    user = models.CharField(max_length=100)
-    score = models.IntegerField(default=0)
-    total = models.IntegerField(default=0)
+class Enrollment(models.Model):
+    learner = models.ForeignKey(Learner, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user
+        return f"{self.learner} - {self.course}"
+
+
+class Submission(models.Model):
+    enrollment = models.ForeignKey(
+        Enrollment,
+        on_delete=models.CASCADE
+    )
+
+    choices = models.ManyToManyField(Choice)
+
+    score = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.enrollment)

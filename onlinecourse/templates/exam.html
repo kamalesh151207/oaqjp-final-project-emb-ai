@@ -1,6 +1,6 @@
 <h1>Online Course Exam</h1>
 
-<form method="POST" action="/submit/">
+<form method="POST" action="{% url 'submit' %}">
   {% csrf_token %}
 
   {% for q in questions %}

@@ -6,7 +6,27 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
+class Instructor(models.Model):
+    full_time = models.BooleanField(default=True)
 
+    def __str__(self):
+        return "Instructor"
+
+
+class Learner(models.Model):
+    occupation = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.occupation
+
+
+class Lesson(models.Model):
+    title = models.CharField(max_length=200)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+    
 class Question(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     text = models.CharField(max_length=255)

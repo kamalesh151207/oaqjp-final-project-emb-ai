@@ -5,37 +5,32 @@
 </head>
 <body>
 
-    <h1>🎉 Congratulations</h1>
+<h1>🎉 Congratulations</h1>
 
-    <h2>Your Result</h2>
+<h2>Your Result</h2>
 
-    <p>Your Score: {{ score }} / {{ total }}</p>
+<p>Your Score: {{ score }} / {{ total }}</p>
 
-    <p>Status: Passed ✅</p>
+<hr>
 
-    <hr>
+<h2>Exam Results</h2>
 
-    <h2>Exam Results</h2>
+{% for question in questions %}
+    <h3>{{ question.text }}</h3>
 
-    {% for question in questions %}
-        <div>
-            <h3>{{ question.text }}</h3>
+    <ul>
+    {% for choice in question.choice_set.all %}
+        <li>
+            {{ choice.text }}
 
-            <ul>
-                {% for choice in question.choice_set.all %}
-                    <li>
-                        {{ choice.text }}
-
-                        {% if choice.is_correct %}
-                            ✅ Correct Answer
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-
-        </div>
-        <hr>
+            {% if choice.is_correct %}
+                ✅ Correct Answer
+            {% endif %}
+        </li>
     {% endfor %}
+    </ul>
+
+{% endfor %}
 
 </body>
 </html>

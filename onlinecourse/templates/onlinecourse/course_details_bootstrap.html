@@ -6,22 +6,24 @@
 </head>
 <body class="container mt-4">
 
-    <h1>{{ course.name }}</h1>
+    <div class="card p-4">
+        <h1 class="mb-4">{{ course.name }}</h1>
 
-    <h3>Questions</h3>
+        <h3>Lessons</h3>
 
-    {% for question in questions %}
-        <div class="card mt-3 p-3">
-            <h5>{{ question.text }}</h5>
-
-            {% for choice in question.choice_set.all %}
-                <div>
-                    <input type="radio" name="{{ question.id }}" value="{{ choice.id }}">
-                    {{ choice.text }}
-                </div>
+        <ul class="list-group">
+            {% for lesson in course.lesson_set.all %}
+                <li class="list-group-item">
+                    {{ lesson.title }}
+                </li>
+            {% empty %}
+                <li class="list-group-item">
+                    No lessons available.
+                </li>
             {% endfor %}
-        </div>
-    {% endfor %}
+        </ul>
+
+    </div>
 
 </body>
 </html>
